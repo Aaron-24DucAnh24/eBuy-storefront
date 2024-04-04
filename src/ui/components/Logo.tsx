@@ -1,25 +1,15 @@
 "use client";
-
-import { usePathname } from "next/navigation";
-import { LinkWithChannel } from "../atoms/LinkWithChannel";
+import Link from "next/link";
 
 const companyName = "eBuy";
 
 export const Logo = () => {
-  const pathname = usePathname();
-
-  if (pathname === "/") {
-    return (
-      <h1 className="flex items-center font-bold" aria-label="homepage">
-        {companyName}
-      </h1>
-    );
-  }
   return (
-    <div className="flex items-center font-bold">
-      <LinkWithChannel aria-label="homepage" href="/">
-        {companyName}
-      </LinkWithChannel>
-    </div>
+    <Link
+      className="flex items-center font-bold italic text-2xl"
+      aria-label="homepage"
+      href={"/default-channel/products"}>
+      {companyName}
+    </Link>
   );
 };

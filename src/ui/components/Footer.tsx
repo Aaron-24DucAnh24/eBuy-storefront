@@ -6,7 +6,7 @@ import { ChannelsListDocument, MenuGetBySlugDocument } from "@/gql/graphql";
 import { executeGraphQL } from "@/lib/graphql";
 
 export async function Footer({ channel }: { channel: string }) {
-  const footerLinks = await executeGraphQL(MenuGetBySlugDocument, {
+  await executeGraphQL(MenuGetBySlugDocument, {
     variables: { slug: "footer", channel },
     revalidate: 60 * 60 * 24,
   });
@@ -25,45 +25,58 @@ export async function Footer({ channel }: { channel: string }) {
     <footer className="border-neutral-300 bg-neutral-50">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
         <div className="grid grid-cols-3 gap-8 py-16">
-          {footerLinks.menu?.items?.map((item) => {
-            return (
-              <div key={item.id}>
-                <h3 className="text-sm font-semibold text-neutral-900">{item.name == 'Saleor' ? 'eBuy' : item.name}</h3>
-                <ul className="mt-4 space-y-4 [&>li]:text-neutral-500">
-                  {item.children?.map((child) => {
-                    if (child.category) {
-                      return (
-                        <li key={child.id} className="text-sm">
-                          <LinkWithChannel href={`/categories/${child.category.slug}`}>
-                            {child.category.name}
-                          </LinkWithChannel>
-                        </li>
-                      );
-                    }
-                    if (child.collection) {
-                      return (
-                        <li key={child.id} className="text-sm">
-                          <LinkWithChannel href={`/collections/${child.collection.slug}`}>
-                            {child.collection.name}
-                          </LinkWithChannel>
-                        </li>
-                      );
-                    }
-                    if (child.page) {
-                      return (
-                        <li key={child.id} className="text-sm">
-                          <LinkWithChannel href={`/pages/${child.page.slug}`}>
-                            {child.page.title}
-                          </LinkWithChannel>
-                        </li>
-                      );
-                    }
-                    return null;
-                  })}
-                </ul>
-              </div>
-            );
-          })}
+          <div>
+            <h3 className="text-sm font-semibold text-neutral-900">Pages</h3>
+            <ul className="mt-4 space-y-4 [&>li]:text-neutral-500">
+              <li className="text-sm">
+                <LinkWithChannel href={'/pages/about'}>
+                  {'About'}
+                </LinkWithChannel>
+              </li>
+              <li className="text-sm">
+                <LinkWithChannel href={'/pages/developers'}>
+                  {'Developers'}
+                </LinkWithChannel>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold text-neutral-900">Collections</h3>
+            <ul className="mt-4 space-y-4 [&>li]:text-neutral-500">
+              <li className="text-sm">
+                <LinkWithChannel href={'/collections/featured-products'}>
+                  {'Featured products'}
+                </LinkWithChannel>
+              </li>
+              <li className="text-sm">
+                <LinkWithChannel href={'/collections/suggested-products'}>
+                  {'Suggested products'}
+                </LinkWithChannel>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold text-neutral-900">Categories</h3>
+            <ul className="mt-4 space-y-4 [&>li]:text-neutral-500">
+              <li className="text-sm">
+                <LinkWithChannel href={'/categories/phone'}>
+                  {'Phone'}
+                </LinkWithChannel>
+              </li>
+              <li className="text-sm">
+                <LinkWithChannel href={'/categories/laptop'}>
+                  {'Laptop'}
+                </LinkWithChannel>
+              </li>
+              <li className="text-sm">
+                <LinkWithChannel href={'/categories/tablet'}>
+                  {'Tablet'}
+                </LinkWithChannel>
+              </li>
+            </ul>
+          </div>
         </div>
 
         {channels?.channels && (
@@ -78,11 +91,11 @@ export async function Footer({ channel }: { channel: string }) {
           <p className="text-sm text-neutral-500">Copyright &copy; {currentYear} <i className="font-bold not-italic">eBuy</i>, Inc.</p>
           <p className="flex gap-1 text-sm text-neutral-500">
             Customed from Saleor by{" "}
-            <Link target={"_blank"} href={"https://saleor.io/"}>
+            <Link className="font-bold" target={"_blank"} href={"https://saleor.io/"}>
               Bucky
             </Link>{" "}
-            <Link href={"https://github.com/saleor/saleor"} target={"_blank"} className={"opacity-30"}>
-              <Image alt="Saleor github repository" height={20} width={20} src={"/github-mark.svg"} />
+            <Link href={"https://github.com/Aaron-24DucAnh24/eBuy-storefront"} target={"_blank"} className={"opacity-30"}>
+              <Image alt="eBuy github repository" height={20} width={20} src={"/github-mark.svg"} />
             </Link>
           </p>
         </div>
