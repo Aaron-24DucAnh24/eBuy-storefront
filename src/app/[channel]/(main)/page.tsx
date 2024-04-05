@@ -3,9 +3,8 @@ import { executeGraphQL } from "@/lib/graphql";
 import { ProductList } from "@/ui/components/ProductList";
 
 export const metadata = {
-  title: "eBuy Storefront, powered by Saleor & Next.js",
-  description:
-    "Storefront Next.js Example for building performant e-commerce experiences with Saleor - the composable, headless commerce platform for global brands.",
+  title: "eBuy Storefront",
+  description: "Digital devices selling website.",
 };
 
 export default async function Page({ params }: { params: { channel: string } }) {
