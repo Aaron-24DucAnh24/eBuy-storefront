@@ -2,34 +2,34 @@ import { invariant } from "ts-invariant";
 import { RootWrapper } from "./pageWrapper";
 
 export const metadata = {
-  title: "Checkout · eBuy Storefront",
+	title: "Checkout · eBuy Storefront",
 };
 
 export default function CheckoutPage({
-  searchParams,
+	searchParams,
 }: {
-  searchParams: { checkout?: string; order?: string };
+	searchParams: { checkout?: string; order?: string };
 }) {
-  invariant(process.env.NEXT_PUBLIC_SALEOR_API_URL, "Missing NEXT_PUBLIC_SALEOR_API_URL env variable");
+	invariant(process.env.NEXT_PUBLIC_SALEOR_API_URL, "Missing NEXT_PUBLIC_SALEOR_API_URL env variable");
 
-  if (!searchParams.checkout && !searchParams.order) {
-    return null;
-  }
+	if (!searchParams.checkout && !searchParams.order) {
+		return null;
+	}
 
-  return (
-    <div className="min-h-dvh bg-white">
-      <section className="mx-auto flex min-h-dvh max-w-7xl flex-col p-8">
-        <div className="flex items-center font-bold">
-          <a aria-label="homepage" href="/">
-            ebuy
-          </a>
-        </div>
-        <h1 className="mt-8 text-3xl font-bold text-neutral-900">Checkout</h1>
+	return (
+		<div className="min-h-dvh bg-white">
+			<section className="mx-auto flex min-h-dvh max-w-7xl flex-col p-8">
+				<div className="flex items-center font-bold">
+					<a aria-label="homepage" href="/">
+						ebuy
+					</a>
+				</div>
+				<h1 className="mt-8 text-3xl font-bold text-neutral-900">Checkout</h1>
 
-        <section className="mb-12 mt-6 flex-1">
-          <RootWrapper saleorApiUrl={process.env.NEXT_PUBLIC_SALEOR_API_URL} />
-        </section>
-      </section>
-    </div>
-  );
+				<section className="mb-12 mt-6 flex-1">
+					<RootWrapper saleorApiUrl={process.env.NEXT_PUBLIC_SALEOR_API_URL} />
+				</section>
+			</section>
+		</div>
+	);
 }

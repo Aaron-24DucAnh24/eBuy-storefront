@@ -1,0 +1,22 @@
+mutation InitializeAyden($checkoutId: ID!) {
+	paymentGatewayInitialize(
+		id: $checkoutId
+		action: AUTHORIZATION
+		paymentGateways: [{ id: "app.saleor.adyen" }]
+	) {
+		gatewayConfigs {
+			id
+			data
+			errors {
+				field
+				message
+				code
+			}
+		}
+		errors {
+			field
+			message
+			code
+		}
+	}
+}
